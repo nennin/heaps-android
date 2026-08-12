@@ -1,0 +1,8 @@
+*.hl
+android/app/build/
+android/app/.cxx/
+android/build/
+android/.gradle/
+android/local.properties
+android/native/
+*.apk
