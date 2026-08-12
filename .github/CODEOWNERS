@@ -16,21 +16,21 @@
 /LICENSE      @nennin
 
 # Roguelike project: build selector and Haxe build configs.
-/rogue_like/build.sh       @nennin
-/rogue_like/*.hxml         @nennin
+/roguelike/build.sh       @nennin
+/roguelike/*.hxml         @nennin
 
 # Cross-platform game logic. Must stay platform-free: no hxd.Key,
 # no Android APIs - movement is driven by the injected InputController.
-/rogue_like/src/core/      @nennin
+/roguelike/src/core/      @nennin
 
 # Input controllers - one implementation per platform (keyboard / touch).
-/rogue_like/src/input/     @nennin
+/roguelike/src/input/     @nennin
 
 # Platform entry point (the only place that branches on the platform).
-/rogue_like/src/Main.hx    @nennin
+/roguelike/src/Main.hx    @nennin
 
 # Android-specific project: Gradle/CMake, Java activity, HashLink patches.
-/rogue_like/android/       @nennin
+/roguelike/android/       @nennin
 
 # Embedded resources (fonts, art).
-/rogue_like/res/           @nennin
+/roguelike/res/           @nennin

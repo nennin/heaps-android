@@ -48,7 +48,7 @@ It wraps two Haxe configs:
 ## Platform code separation
 
 ```
-rogue_like/
+roguelike/
 ├── src/
 │   ├── Main.hx                  # entry: hxd.App; wires the platform input (ONLY platform branch here)
 │   ├── core/
@@ -141,7 +141,7 @@ adb logcat -s SDL            # game trace() output (routed via SDL)
 
 ## Bug fixes included
 
-- Fixed `hxd.Res.john` (nonexistent resource) -> the actual embedded
+- Fixed an invalid embedded-resource reference -> the actual
   `res/haxeLogo.png` (`hxd.Res.haxeLogo`).
 - Resources now use `hxd.Res.initEmbed()` (works on desktop and Android AOT).
 - Removed the invalid `-D Roguelike nessa zaralha` define.
