@@ -138,22 +138,3 @@ adb logcat -s SDL            # game trace() output (routed via SDL)
   (the game is AOT-compiled; HashLink has no JIT for ARM).
 
 ---
-
-## Bug fixes included
-
-- Fixed an invalid embedded-resource reference -> the actual
-  `res/haxeLogo.png` (`hxd.Res.haxeLogo`).
-- Resources now use `hxd.Res.initEmbed()` (works on desktop and Android AOT).
-- Removed the invalid `-D Roguelike nessa zaralha` define.
-- Removed noisy per-character traces for decorative map markers (`A`, `C`).
-- `.gitignore` covers build artifacts (`*.hl`, `android/` outputs).
-- Text sizes: map glyphs are scaled so they fill their cell and the help text
-  is larger, so the game reads clearly on phone screens.
-- Touch D-pad buttons are bigger (72 base instead of 48) with larger labels.
-- **Android soft keyboard no longer pops at startup**: HashLink's SDL glue
-  used to call `SDL_StartTextInput(win)` for every new window (SDL2 compat).
-  On Android that opens the IME, so the call is now guarded with
-  `#ifndef HL_ANDROID` (machine-level patch in `~/src/hashlink-1.16/libs/sdl/sdl.c`,
-  shared with the breakout build). Re-apply it with
-  `git apply android/patches/hashlink-sdl-android-textinput.patch` if you
-  re-clone that HashLink tree.
