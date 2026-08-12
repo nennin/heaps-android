@@ -20,6 +20,10 @@ class Roguelike {
 
 	final fieldSize = 32.0;
 	final margin = 80.0;
+	// Text sizes: glyphs fill their cell (16px font base * scale = cellSize),
+	// bumped up so characters read clearly on phones. The help text is larger.
+	static final GLYPH_SCALE = 2.6;
+	static final HELP_SCALE = 3.0;
 	final levelString = "
                                                     ###################
                ###########################          #                 #
@@ -59,7 +63,7 @@ class Roguelike {
 
 		howToPlayInfo = new h2d.Text(hxd.res.DefaultFont.get(), s2d);
 		howToPlayInfo.text = input.helpText();
-		howToPlayInfo.scale(2 * fitScale);
+		howToPlayInfo.scale(HELP_SCALE * fitScale);
 
 		// Parse the ASCII level into grid coordinates.
 		var x = 0;
@@ -87,7 +91,7 @@ class Roguelike {
 				var o = new h2d.Object(s2d);
 				var t = new h2d.Text(hxd.res.DefaultFont.get(), o);
 				t.text = character;
-				t.scale(2 * fitScale);
+				t.scale(GLYPH_SCALE * fitScale);
 				walls.push({c: x, r: y, obj: o});
 			case "E": // exit marker (text) + artifact image above it
 				exitCol = x;
@@ -95,7 +99,7 @@ class Roguelike {
 				eObj = new h2d.Object(s2d);
 				var t = new h2d.Text(hxd.res.DefaultFont.get(), eObj);
 				t.text = character;
-				t.scale(2 * fitScale);
+				t.scale(GLYPH_SCALE * fitScale);
 			default:
 				// Decorative map markers (A, C, ...) - ignored, no logic.
 		}
@@ -130,7 +134,7 @@ class Roguelike {
 			player = new h2d.Object(s2d);
 			var t = new h2d.Text(hxd.res.DefaultFont.get(), player);
 			t.text = "@";
-			t.scale(2 * fitScale);
+			t.scale(GLYPH_SCALE * fitScale);
 		}
 		player.setPosition(margin + playerCol * cellSize, margin + playerRow * cellSize);
 
@@ -156,8 +160,8 @@ class Roguelike {
 	/** Re-fit the layout after the window/screen changes. */
 	public function resize() {
 		computeFitScale();
-		var ts = 2 * fitScale;
-		howToPlayInfo.scale(ts);
+		var ts = GLYPH_SCALE * fitScale;
+		howToPlayInfo.scale(HELP_SCALE * fitScale);
 		if (player != null) player.getChildAt(0).scale(ts);
 		for (w in walls) w.obj.getChildAt(0).scale(ts);
 		if (eObj != null) eObj.getChildAt(0).scale(ts);

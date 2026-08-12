@@ -114,8 +114,11 @@ NDK CMake + Gradle        -> APK (libhl + fmt/sdl/ui/uv hdlls + SDL3 + game)
 
 On Android, `TouchInput` draws a virtual D-pad (4 buttons) at the bottom-right
 corner. **Hold** a button to keep moving in that direction, like holding a key.
-The D-pad scales with the screen (`min(width/1024, height/768)`), so it stays
-usable on any resolution.
+The D-pad scales with the screen (`min(width/1024, height/768)`) so it stays
+usable on any resolution, and the buttons are sized as large touch targets.
+
+On desktop you can preview the on-screen D-pad (e.g. for layout tweaks) with
+`FORCE_TOUCH=1 hl roguelike.hl`.
 
 ### Install & test
 
@@ -144,3 +147,13 @@ adb logcat -s SDL            # game trace() output (routed via SDL)
 - Removed the invalid `-D Roguelike nessa zaralha` define.
 - Removed noisy per-character traces for decorative map markers (`A`, `C`).
 - `.gitignore` covers build artifacts (`*.hl`, `android/` outputs).
+- Text sizes: map glyphs are scaled so they fill their cell and the help text
+  is larger, so the game reads clearly on phone screens.
+- Touch D-pad buttons are bigger (72 base instead of 48) with larger labels.
+- **Android soft keyboard no longer pops at startup**: HashLink's SDL glue
+  used to call `SDL_StartTextInput(win)` for every new window (SDL2 compat).
+  On Android that opens the IME, so the call is now guarded with
+  `#ifndef HL_ANDROID` (machine-level patch in `~/src/hashlink-1.16/libs/sdl/sdl.c`,
+  shared with the breakout build). Re-apply it with
+  `git apply android/patches/hashlink-sdl-android-textinput.patch` if you
+  re-clone that HashLink tree.

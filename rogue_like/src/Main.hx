@@ -24,7 +24,8 @@ class Main extends hxd.App {
 		// and Android (no runtime filesystem dependency).
 		hxd.Res.initEmbed();
 
-		if (Sys.systemName() == "Android")
+		// FORCE_TOUCH=1 lets you preview the on-screen D-pad on desktop.
+		if (Sys.systemName() == "Android" || Sys.getEnv("FORCE_TOUCH") != null)
 			input = new TouchInput(s2d);
 		else
 			input = new KeyboardInput();

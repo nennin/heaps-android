@@ -1,0 +1,17 @@
+diff --git a/libs/sdl/sdl.c b/libs/sdl/sdl.c
+index 76acb3c..739c7a7 100644
+--- a/libs/sdl/sdl.c
++++ b/libs/sdl/sdl.c
+@@ -648,8 +648,11 @@ HL_PRIM SDL_Window *HL_NAME(win_create_ex)(int x, int y, int width, int height,
+ 	SDL_RaiseWindow(win); // better first focus lost behavior
+ #	endif
+ 
+-	// SDL2 compat
++#ifndef HL_ANDROID
++	// SDL2 compat: text input was enabled by default on desktop windows.
++	// On Android this would pop the soft keyboard (IME) at startup.
+ 	SDL_StartTextInput(win);
++#endif
+ 	return win;
+ }
+ 

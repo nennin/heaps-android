@@ -36,9 +36,9 @@ class TouchInput implements InputController {
 		backgrounds = [];
 
 		var s = currentScale();
-		var size = Std.int(48 * s);
-		var gap = Std.int(10 * s);
-		var margin = 20 * s;
+		var size = Std.int(72 * s);
+		var gap = Std.int(14 * s);
+		var margin = 24 * s;
 		var cx = s2d.width - (size * 3 + gap * 2) - margin;
 		var cy = s2d.height - (size * 3 + gap * 2) - margin;
 
@@ -66,7 +66,7 @@ class TouchInput implements InputController {
 			};
 			var t = new Text(DefaultFont.get(), b);
 			t.text = label;
-			t.scale(s);
+			t.scale(size / 28);
 			t.x = (b.width - t.textWidth * t.scaleX) / 2;
 			t.y = (b.height - t.textHeight * t.scaleY) / 2;
 			buttons.push(b);
