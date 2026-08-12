@@ -18,6 +18,7 @@ class TouchInput implements InputController {
 	var dx = 0;
 	var dy = 0;
 	var buttons:Array<Interactive> = [];
+	var backgrounds:Array<h2d.Graphics> = [];
 
 	public function new(s2d:h2d.Scene) {
 		this.s2d = s2d;
@@ -30,20 +31,27 @@ class TouchInput implements InputController {
 
 	function buildDpad() {
 		for (b in buttons) b.remove();
+		for (g in backgrounds) g.remove();
 		buttons = [];
+		backgrounds = [];
 
 		var s = currentScale();
-		var size = Std.int(56 * s);
+		var size = Std.int(48 * s);
 		var gap = Std.int(10 * s);
 		var margin = 20 * s;
 		var cx = s2d.width - (size * 3 + gap * 2) - margin;
 		var cy = s2d.height - (size * 3 + gap * 2) - margin;
 
 		function add(x:Float, y:Float, dirX:Int, dirY:Int, label:String) {
+			// Visible background: Graphics quad (geometry-based, robust on GLES).
+			var bg = new h2d.Graphics(s2d);
+			bg.beginFill(0xFF335588, 1);
+			bg.drawRect(x, y, size, size);
+			bg.endFill();
+			// Hit area on top (transparent - the background is drawn above).
 			var b = new Interactive(size, size, s2d);
 			b.x = x;
 			b.y = y;
-			b.backgroundColor = 0x335588;
 			b.onPush = function(_) {
 				dx = dirX;
 				dy = dirY;
@@ -62,6 +70,7 @@ class TouchInput implements InputController {
 			t.x = (b.width - t.textWidth * t.scaleX) / 2;
 			t.y = (b.height - t.textHeight * t.scaleY) / 2;
 			buttons.push(b);
+			backgrounds.push(bg);
 		}
 
 		add(cx + size + gap, cy, 0, -1, "^");
@@ -71,6 +80,9 @@ class TouchInput implements InputController {
 	}
 
 	public function update(dt:Float) {}
+
+	/** Rebuild the D-pad when the screen size changes. */
+	public function onResize() buildDpad();
 
 	public function directionX() return dx;
 	public function directionY() return dy;

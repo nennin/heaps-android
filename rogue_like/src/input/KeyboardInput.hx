@@ -21,4 +21,5 @@ class KeyboardInput implements InputController {
 	public function directionX() return dx;
 	public function directionY() return dy;
 	public function helpText() return "Arrow keys / WASD to move.";
+	public function onResize() {}
 }

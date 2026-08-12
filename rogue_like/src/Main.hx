@@ -36,4 +36,11 @@ class Main extends hxd.App {
 		input.update(dt);
 		game.update(dt);
 	}
+
+	/** Re-fit the game layout and touch UI when the window/screen resizes. */
+	override function onResize() {
+		super.onResize();
+		if (game != null)
+			game.resize();
+	}
 }

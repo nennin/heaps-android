@@ -10,6 +10,8 @@ package input;
 interface InputController {
 	/** Poll input / update any on-screen UI. Call once per frame before the game update. */
 	function update(dt:Float):Void;
+	/** Rebuild/reposition any on-screen UI after the window or screen size changes. */
+	function onResize():Void;
 	/** Horizontal direction: -1 left, 0 none, +1 right. */
 	function directionX():Int;
 	/** Vertical direction: -1 up, 0 none, +1 down. */
