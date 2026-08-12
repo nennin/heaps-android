@@ -1,0 +1,7 @@
+# Android build (AOT C output, packaged by the android/ Gradle project)
+# Usage: haxe android.hxml
+-cp src
+-lib heaps
+-lib hlsdl
+-main Main
+-hl android/native/game.c

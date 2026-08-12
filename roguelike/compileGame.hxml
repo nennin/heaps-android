@@ -1,0 +1,8 @@
+# PC (desktop) build
+# Usage: haxe compileGame.hxml
+-cp src
+-lib heaps
+-lib hlsdl
+-main Main
+-hl roguelike.hl
+-D windowSize=1024x768

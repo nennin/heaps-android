@@ -1,0 +1,49 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "hxml",
+            "label": "Build",
+            "file": "compileGame.hxml",
+            "problemMatcher": [
+                "$haxe-absolute",
+                "$haxe",
+                "$haxe-error",
+                "$haxe-trace"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "hxml",
+            "label": "Build (debug)",
+            "file": "dev.hxml",
+            "problemMatcher": [
+                "$haxe-absolute",
+                "$haxe",
+                "$haxe-error",
+                "$haxe-trace"
+            ]
+        },
+        {
+            "type": "shell",
+            "label": "Build Android",
+            "command": "cd ${workspaceFolder} && ./build.sh android",
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "label": "Build and Run Android",
+            "command": "cd ${workspaceFolder} && ./build.sh android && adb install -r android/app/build/outputs/apk/debug/app-debug.apk && adb shell am start -n org.haxe.roguelike/.MainActivity",
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "label": "Android Logcat",
+            "command": "adb logcat -s SDL",
+            "problemMatcher": []
+        }
+    ]
+}
