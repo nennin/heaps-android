@@ -1,0 +1,36 @@
+# CODEOWNERS
+#
+# GitHub automatically requests reviews from the listed owners for pull
+# requests that touch matching paths. Since this is a solo project, the
+# default owner is the maintainer; the per-section entries below document
+# the intended ownership areas for future collaborators.
+#
+# Syntax: pattern followed by one or more @owner / @org/team names.
+# More specific paths override less specific ones.
+
+# Default: everything belongs to the maintainer.
+* @nennin
+
+# Repository-level documentation.
+/README.md    @nennin
+/LICENSE      @nennin
+
+# Roguelike project: build selector and Haxe build configs.
+/rogue_like/build.sh       @nennin
+/rogue_like/*.hxml         @nennin
+
+# Cross-platform game logic. Must stay platform-free: no hxd.Key,
+# no Android APIs - movement is driven by the injected InputController.
+/rogue_like/src/core/      @nennin
+
+# Input controllers - one implementation per platform (keyboard / touch).
+/rogue_like/src/input/     @nennin
+
+# Platform entry point (the only place that branches on the platform).
+/rogue_like/src/Main.hx    @nennin
+
+# Android-specific project: Gradle/CMake, Java activity, HashLink patches.
+/rogue_like/android/       @nennin
+
+# Embedded resources (fonts, art).
+/rogue_like/res/           @nennin
